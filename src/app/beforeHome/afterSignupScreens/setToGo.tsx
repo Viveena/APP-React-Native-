@@ -6,8 +6,8 @@ import { useRouter } from 'expo-router';
 import React from 'react';
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import {
-    heightPercentageToDP as hp,
-    widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 
 const SetToGo = () => {
@@ -41,7 +41,7 @@ const SetToGo = () => {
           <PrimaryButton
             title="OK, Great!"
             type="primary"
-            onPress={() => router.push('')}
+            onPress={() => router.push('/afterHome/home')}
           />
         </View>
       </View>
