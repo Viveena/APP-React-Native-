@@ -1,10 +1,14 @@
 import { Colors } from '@/src/constants/colors';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useEffect, useState } from 'react';
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
-const screenWidth = Dimensions.get('window').width - 60;
+const screenWidth = wp('89.5%');
 
 type DataPoint = { label: string; systolic: number; diastolic: number };
 
@@ -35,8 +39,8 @@ const generateWeekDates = (startDate: Date): { labels: string[]; range: string; 
 
     data.push({
       label,
-      systolic: 100 + Math.floor(Math.random() * 6),  // 100–105
-      diastolic: 70 + Math.floor(Math.random() * 6),  // 70–75
+      systolic: 100 + Math.floor(Math.random() * 6),
+      diastolic: 70 + Math.floor(Math.random() * 6),
     });
   }
 
@@ -54,7 +58,7 @@ const CustomChart = () => {
   useEffect(() => {
     const { data, range, labels } = generateWeekDates(startDate);
     setWeekRange(range);
-    setLabels(data.map((d) => '')); // Hiding date labels on x-axis
+    setLabels(data.map(() => '')); // Hide x-axis labels
     setSystolicData(data.map((d) => d.systolic));
     setDiastolicData(data.map((d) => d.diastolic));
   }, [startDate]);
@@ -67,35 +71,27 @@ const CustomChart = () => {
 
   return (
     <View style={styles.wrapper}>
-      {/* Header: Week & Arrows */}
       <View style={styles.headerRow}>
         <TouchableOpacity onPress={() => handleArrowClick('prev')}>
-          <Ionicons name="chevron-back" size={20} color={Colors.secondary} />
+          <Ionicons name="chevron-back" size={wp('5%')} color={Colors.secondary} />
         </TouchableOpacity>
         <Text style={styles.weekText}>{weekRange}</Text>
         <TouchableOpacity onPress={() => handleArrowClick('next')}>
-          <Ionicons name="chevron-forward" size={20} color={Colors.secondary} />
+          <Ionicons name="chevron-forward" size={wp('5%')} color={Colors.secondary} />
         </TouchableOpacity>
       </View>
 
-      {/* Grouped Bar Chart */}
       <BarChart
         data={{
-          labels: labels,
+          labels,
           datasets: [
-            {
-              data: systolicData,
-              color: () => '#DAF3F0',
-            },
-            {
-              data: diastolicData,
-              color: () => '#A1E3D8',
-            },
+            { data: systolicData, color: () => '#DAF3F0' },
+            { data: diastolicData, color: () => '#A1E3D8' },
           ],
           legend: ['Systolic', 'Diastolic'],
         }}
         width={screenWidth}
-        height={220}
+        height={hp('28%')}
         chartConfig={chartConfig}
         withInnerLines={false}
         fromZero
@@ -110,31 +106,33 @@ const CustomChart = () => {
 const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
-    marginVertical: 16,
-    padding: 8,
-    borderRadius: 16,
+    marginVertical: hp('2%'),
+    padding: wp('7%'),
+    borderRadius: wp('3.5%'),
     borderColor: Colors.secondary,
     borderWidth: 1,
     backgroundColor: '#FAFAFA',
-    height:265,
-    width:335,
-    marginLeft:10,
+    height: hp('35%'),
+    width: wp('90%'),
+    alignSelf: 'center',
   },
   headerRow: {
     width: screenWidth,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 8,
-    paddingHorizontal: 10,
+    marginBottom: hp('1%'),
+    paddingHorizontal: wp('2.5%'),
   },
   weekText: {
-    fontSize: 14,
+    fontSize: hp('1.8%'),
     color: Colors.secondary,
     fontWeight: '600',
+    textAlign: 'center',
+    flex: 1,
   },
   chart: {
-    borderRadius: 16,
+    borderRadius: wp('4%'),
   },
 });
 

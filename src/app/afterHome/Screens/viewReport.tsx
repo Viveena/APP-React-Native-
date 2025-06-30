@@ -131,7 +131,8 @@ const styles = StyleSheet.create({
   fontSize: 22,
   fontFamily: Fonts.bold,
   color: '#000',
-  marginRight:hp('5%')
+  marginRight:hp('5%'),
+  
 },
 
 
@@ -158,6 +159,7 @@ const styles = StyleSheet.create({
     height:99,
     marginLeft:hp('0.5%'),
     position: 'relative',
+
 },
 
   dropIcon: { width: 136, 
@@ -170,26 +172,31 @@ const styles = StyleSheet.create({
   },
 
   title: { fontSize: 20, 
-    fontFamily: Fonts.bold 
+    fontFamily: Fonts.bold,
+    marginTop:-hp('0.5%') 
   },
 
   subtitle: { fontFamily: Fonts.regular, 
     fontSize:12,
     color: '#4C4C4C', 
     marginBottom: 8,
-  marginTop:hp('0.5%'),  },
+  marginTop:hp('0.3%'),
+  },
 
   rowWithIcon: { 
     flexDirection: 'row', 
     alignItems: 'center', 
     gap: 8, 
     marginBottom: 5,
+   
     
   },
 
   dateText: { 
     fontFamily: Fonts.regular, 
-    color: Colors.secondary },
+    color: Colors.secondary ,
+
+  },
 
   aiBox: { flexDirection: 'row', 
     backgroundColor: '#07AE9C29', 

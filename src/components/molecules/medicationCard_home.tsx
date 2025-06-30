@@ -46,7 +46,7 @@ const MedicationCardHome = ({ name, dose, onPress }: Props) => {
         {/* Tick Icon */}
         <Ionicons
           name="checkmark-circle"
-          size={24}
+          size={wp('6%')}
           color={Colors.primary}
           style={styles.checkIcon}
         />
@@ -60,15 +60,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#07AE9C29',
     borderRadius: wp('4%'),
     paddingHorizontal: wp('3%'),
-    height: 59,
-    width: 244,
+    height: hp('8%'),
+    width: wp('65%'),
     justifyContent: 'center',
     marginTop: hp('2%'),
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 4,
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 1 },
+    // shadowOpacity: 0.1,
+    //shadowRadius: 3,
+    //elevation: 4,
   },
   contentWrapper: {
     flexDirection: 'row',
@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
     marginTop: -hp('3.5%'),
   },
   capsuleImage: {
-    width: 58,
-    height: 58,
+    width: 60,
+    height: 60,
     resizeMode: 'contain',
   },
   textContainer: {
@@ -91,13 +91,13 @@ const styles = StyleSheet.create({
     marginLeft: wp('2%'),
   },
   medicineName: {
-    fontSize: 14,
+    fontSize: hp('1.8%'),
     fontWeight: '600',
     color: '#003366',
     marginBottom: hp('0.4%'),
   },
   dosage: {
-    fontSize: 12,
+    fontSize: hp('1.5%'),
     color: '#333',
   },
   checkIcon: {

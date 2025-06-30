@@ -46,7 +46,7 @@ const ProfileScreen = () => {
 
     {/* Stats Cards */}
     <ProfileStatCards />
-  </View> // ✅ Add this closing tag
+  </View> 
 );
 
 

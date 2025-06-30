@@ -72,18 +72,6 @@ const HomeScreen = () => {
   ),
 },
 
-//   {
-//   key: 'statCards',
-//   render: () => (
-//     <FlatList
-//       data={statData.slice(0, 5)}
-//       horizontal
-//       keyExtractor={(_, i) => i.toString()}
-//       showsHorizontalScrollIndicator={false}
-//       renderItem={({ item }) => <StatCard {...item} />}
-//     />
-//   ),
-// },
   {
   key: 'viewAllButton',
   render: () => (

@@ -220,217 +220,257 @@ const ReportScreen = () => {
 };
 
 const styles = StyleSheet.create({
-   background: { flex: 1 },
-  container: { 
-    flex: 1, 
-    paddingTop: hp('8%'), 
+  background: { flex: 1 },
+  container: {
+    flex: 1,
+    paddingTop: hp('8%'),
     paddingHorizontal: wp('4.5%'),
-   marginBottom:hp('18%') },
+    marginBottom: hp('18%'),
+  },
 
-  header: { 
-    flexDirection: 'row', 
-    justifyContent: 'space-between', 
-    alignItems: 'center', 
-    marginBottom: hp('2%') },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: hp('2%'),
+  },
 
-  headerText: { 
-    fontSize: 20, 
-    fontFamily: Fonts.bold },
+  headerText: {
+    fontSize: hp('2.5%'),
+    fontFamily: Fonts.bold,
+  },
 
-  shareButton: { 
-    flexDirection: 'row', 
-    alignItems: 'center', 
-    backgroundColor: '#07AE9C', 
-    paddingHorizontal: 12, 
-    paddingVertical: 6, 
-    borderRadius: 12,
-    height:40,
-    width:93 },
+  shareButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#07AE9C',
+    paddingHorizontal: wp('3%'),
+    paddingVertical: hp('0.8%'),
+    borderRadius: wp('3%'),
+    height: hp('5.5%'),
+    width: wp('25%'),
+  },
 
-  shareText: { color: Colors.text, 
-    marginLeft: 4, 
-    fontFamily: Fonts.regular },
+  shareText: {
+    color: Colors.text,
+    marginLeft: wp('1%'),
+    fontFamily: Fonts.regular,
+    fontSize: hp('1.6%'),
+  },
 
-  card: { backgroundColor: '#FFEAEA', 
-    borderRadius: 20, 
-    padding: 16, 
-    marginBottom: hp('2%'), 
-    marginTop:hp('1%'),
-    width:350,
-    height:210,
-    marginLeft:hp('0.5%')
-},
+  card: {
+    backgroundColor: '#FFEAEA',
+    borderRadius: wp('5%'),
+    padding: wp('4%'),
+    marginBottom: hp('2%'),
+    marginTop: hp('1%'),
+    width: wp('90%'),
+    height: hp('28%'),
+    alignSelf: 'center',
+  },
 
-  cardHeader: { flexDirection: 'row', 
-    justifyContent: 'space-between', 
-    alignItems: 'center' },
+  cardHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
 
-  dropIcon: { width: 136, 
-    height: 135, 
+  dropIcon: {
+    width: wp('35%'),
+    height: wp('35%'),
     resizeMode: 'contain',
     position: 'absolute',
-    top: -hp('5.5%'), // ⬅️ Push out from top
-    left: wp('51%'),
+    top: -hp('5.5%'),
+    left: wp('55%'),
     zIndex: 1,
   },
 
-  title: { fontSize: 20, 
-    fontFamily: Fonts.bold 
+  title: {
+    fontSize: hp('2.5%'),
+    fontFamily: Fonts.bold,
   },
 
-  subtitle: { fontFamily: Fonts.regular, 
-    fontSize:12,
-    color: '#4C4C4C', 
-    marginBottom: 8,
-  marginTop:hp('0.5%'),  },
+  subtitle: {
+    fontFamily: Fonts.regular,
+    fontSize: hp('1.6%'),
+    color: '#4C4C4C',
+    marginBottom: hp('1%'),
+    marginTop: hp('0.5%'),
+  },
 
-  rowWithIcon: { 
-    flexDirection: 'row', 
-    alignItems: 'center', 
-    gap: 8, 
-    marginBottom: 12,
+  rowWithIcon: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: wp('2%'),
+    marginBottom: hp('1.5%'),
+  },
+
+  dateText: {
+    fontFamily: Fonts.regular,
+    color: Colors.secondary,
+    fontSize: hp('1.6%'),
+  },
+
+  statRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: hp('1%'),
+    backgroundColor: Colors.text,
+    height: hp('11%'),
+    width: wp('80%'),
+    borderRadius: wp('5%'),
+    paddingTop: hp('1.3%'),
+    alignSelf: 'center',
     
   },
 
-  dateText: { 
-    fontFamily: Fonts.regular, 
-    color: Colors.secondary },
+  statBox: {
+    alignItems: 'center',
+    gap: 1,
+   
+  },
 
-  statRow: { flexDirection: 'row', 
-    justifyContent: 'space-around', 
-    marginTop: 5,
-    backgroundColor:Colors.text,
-    // padding:hp('1%'),
-    height:92,
-    width:300,
-    borderRadius:18,
-    paddingTop:hp('2%'),
-    marginLeft:hp('0.9%')
-   },
+  statValue: {
+    fontSize: hp('2.4%'),
+    color: '#C00806',
+    fontFamily: Fonts.bold,
+  },
 
-  statBox: { alignItems: 'center',
-    gap:1,
-   },
+  unit: {
+    fontSize: hp('1.5%'),
+    color: Colors.secondary,
+  },
 
-  statValue: { fontSize: 20, 
-    color:'#C00806',
-    fontFamily: Fonts.bold },
+  label: {
+    fontSize: hp('1.5%'),
+    fontFamily: Fonts.regular,
+    marginTop: hp('0.4%'),
+    color: Colors.secondary,
+  },
 
-  unit: { fontSize: 12, 
-    color:Colors.secondary },
-
-  label: { fontSize: 12, 
-    fontFamily: Fonts.regular, 
-    marginTop: 2,
-    color:Colors.secondary  },
-
-  aiBox: { flexDirection: 'row', 
-    backgroundColor: '#07AE9C29', 
-    padding: 14, 
-    borderRadius: 16, 
-    alignItems: 'center', 
-    gap: 10, 
-    marginTop:hp('2%'),
+  aiBox: {
+    flexDirection: 'row',
+    backgroundColor: '#07AE9C29',
+    padding: hp('1.8%'),
+    borderRadius: wp('5%'),
+    alignItems: 'center',
+    gap: wp('2.5%'),
+    marginTop: hp('2%'),
     marginBottom: hp('2%'),
-    marginLeft:hp('0.5%'),
-    width:350,
-    height:124 },
+    alignSelf: 'center',
+    width: wp('90%'),
+    height: hp('18%'),
+  },
 
-  docImg: { width: 185, 
-    height: 179, 
+  docImg: {
+    width: wp('42%'),
+    height: wp('40%'),
     resizeMode: 'contain',
     position: 'absolute',
-    top: -hp('3%'), // ⬅️ Push out from top
-    left: wp('0.5%'),
+    top: hp('2.5%'),
+    left: wp('2%'),
     zIndex: 1,
-   },
+  },
 
-  aiTitle: { fontSize: 16, 
+  aiTitle: {
+    fontSize: hp('2%'),
     fontFamily: Fonts.bold,
-    marginLeft:hp('16.5%'),
-    marginBottom:hp('1%') },
+    marginLeft: wp('38%'),
+    marginBottom: hp('1%'),
+  },
 
-  aiText: { fontSize: 11,
-     fontFamily: Fonts.regular, 
-     color: '#444',
-    marginLeft:hp('16.5%')  },
+  aiText: {
+    fontSize: hp('1.4%'),
+    fontFamily: Fonts.regular,
+    color: '#444',
+    marginLeft: wp('38%'),
+  },
 
-    historyCard: {
+  historyCard: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: '#DAF3F0',
-    padding: 14,
-    borderRadius: 22,
-    marginVertical: 8,
-    marginHorizontal: 8,
-    width: 330,
+    padding: wp('4%'),
+    borderRadius: wp('5.5%'),
+    marginVertical: hp('1%'),
+    width: wp('88%'),
     alignSelf: 'center',
   },
+
   readingSection: {
     justifyContent: 'center',
   },
+
   readingLabel: {
-    fontSize: 12,
+    fontSize: hp('1.5%'),
     color: '#555',
     fontFamily: Fonts.regular,
   },
+
   readingValue: {
-    fontSize: 16,
+    fontSize: hp('2%'),
     fontFamily: Fonts.bold,
     color: Colors.primary,
-    marginBottom: 6,
+    marginBottom: hp('0.5%'),
   },
+
   dateSection: {
     justifyContent: 'center',
     alignItems: 'flex-end',
   },
-
 
   Buttons: {
     alignItems: 'center',
     width: '100%',
     marginBottom: hp('5%'),
   },
-   modalOverlay: {
+
+  modalOverlay: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.4)',
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   modalContainer: {
     backgroundColor: '#fff',
-    borderRadius: 16,
-    padding: 20,
+    borderRadius: wp('5%'),
+    padding: wp('5%'),
     width: '85%',
     position: 'relative',
   },
+
   closeIcon: {
     position: 'absolute',
-    top: 10,
-    right: 10,
+    top: hp('1%'),
+    right: wp('3%'),
   },
+
   modalTitle: {
-    fontSize: 18,
+    fontSize: hp('2.3%'),
     fontFamily: Fonts.bold,
     color: Colors.primary,
     textAlign: 'center',
     marginBottom: hp('2%'),
   },
+
   dateRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
-    gap: 8,
+    marginBottom: hp('2%'),
+    gap: wp('2%'),
   },
+
   unitInput: {
     borderWidth: 1,
     borderColor: Colors.primary,
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    marginBottom: 12,
-    height: 45,
+    borderRadius: wp('2.5%'),
+    paddingHorizontal: wp('3%'),
+    marginBottom: hp('1.5%'),
+    height: hp('6%'),
     fontFamily: Fonts.regular,
     width: '100%',
+    fontSize: hp('1.8%'),
   },
 });
 

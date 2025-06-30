@@ -1,12 +1,13 @@
 // SelectableCardList.tsx
 import { Colors } from '@/src/constants/colors';
 import { Fonts } from '@/src/constants/fonts';
+import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import {
-    FlatList,
-    StyleSheet,
-    Text,
-    TouchableOpacity
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity
 } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
@@ -29,7 +30,7 @@ const SelectableCardList = ({ data, selectedItem, onSelect, onDelete }: Props) =
       style={styles.deleteButton}
       onPress={() => onDelete?.(itemTitle)}
     >
-      <Text style={styles.deleteText}>Delete</Text>
+      <Ionicons name="trash-outline" size={25} color='red' />
     </TouchableOpacity>
   );
 
@@ -88,8 +89,6 @@ const styles = StyleSheet.create({
     marginTop: hp('0.5%'),
   },
   deleteButton: {
-    borderColor:Colors.primary,
-    borderWidth:1,
     justifyContent: 'center',
     alignItems: 'center',
     width: 80,

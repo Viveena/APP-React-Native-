@@ -50,7 +50,7 @@ const OtpVerify = () => {
   // Check if all 6 digits are filled
   const filledOtp = newOtp.join('');
   if (filledOtp.length === 6 && !newOtp.includes('')) {
-    router.push('/beforeHome/afterSignupScreens/resetPassword'); 
+    router.push('/beforeHome/afterSignupScreens/resetPassword_setting'); 
   }
 };
 

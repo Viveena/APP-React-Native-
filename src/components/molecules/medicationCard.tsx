@@ -40,11 +40,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#07AE9C29', // Light green with transparency
     borderRadius: wp('4%'),
     paddingHorizontal: wp('2%'),
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 4,
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 1 },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 3,
+    // elevation: 4,
     height: 59,
     width: 244,
     //marginRight: wp('1%'),
@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
     marginTop: -hp('3.5%'), // 👈 Pops image above the card
   },
   capsuleImage: {
-    width: 58,
-    height:58,
+    width: 60,
+    height:60,
     resizeMode: 'contain',
   },
   textContainer: {

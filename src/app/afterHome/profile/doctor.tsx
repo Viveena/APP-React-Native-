@@ -53,6 +53,7 @@ const AddDoctorScreen = () => {
       <IconInput placeholder="Enter Your Name" icon="person-outline" />
       <IconInput placeholder="Post" icon="person-outline" />
       <IconInput placeholder="Enter Mobile Number" icon="call-outline" />
+      <IconInput placeholder="Enter Address" icon="location-outline" />
       <IconInput placeholder="Number of visit" icon="person-outline" />
 
       {/* Checkboxes */}
@@ -148,7 +149,6 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   saveButton: {
-    marginTop: hp('7%'),
     marginBottom: hp('5%'),
   },
 });

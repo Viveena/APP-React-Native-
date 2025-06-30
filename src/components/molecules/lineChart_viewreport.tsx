@@ -1,10 +1,14 @@
 import { Colors } from '@/src/constants/colors';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useEffect, useState } from 'react';
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
-const screenWidth = Dimensions.get('window').width - 45;
+const screenWidth = wp('90%');
 
 type DataPoint = { label: string; systolic: number; diastolic: number };
 
@@ -45,9 +49,7 @@ const generateData = (startDate: Date, period: string) => {
       });
     }
     range = `${labels[0]} - ${labels[6]}, ${endDate.getFullYear()}`;
-  }
-
-  else if (period === 'Monthly') {
+  } else if (period === 'Monthly') {
     const options = { month: 'short' } as const;
     const month = clone.getMonth();
     const year = clone.getFullYear();
@@ -60,9 +62,7 @@ const generateData = (startDate: Date, period: string) => {
       });
     }
     range = `${clone.toLocaleDateString('en-GB', options)} ${year}`;
-  }
-
-  else if (period === 'Quarterly') {
+  } else if (period === 'Quarterly') {
     const quarter = Math.floor(clone.getMonth() / 3) + 1;
     const year = clone.getFullYear();
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -78,7 +78,7 @@ const generateData = (startDate: Date, period: string) => {
       });
     });
 
-    range = `${selectedMonths} ${year}`;
+    range = `${selectedMonths.join(', ')} ${year}`;
   }
 
   return { labels, data, range };
@@ -117,11 +117,11 @@ const LineCustomChart = ({ period }: { period: string }) => {
     <View style={styles.wrapper}>
       <View style={styles.headerRow}>
         <TouchableOpacity onPress={() => handleArrowClick('prev')}>
-          <Ionicons name="chevron-back" size={20} color={Colors.secondary} />
+          <Ionicons name="chevron-back" size={wp('5%')} color={Colors.secondary} />
         </TouchableOpacity>
         <Text style={styles.weekText}>{rangeText}</Text>
         <TouchableOpacity onPress={() => handleArrowClick('next')}>
-          <Ionicons name="chevron-forward" size={20} color={Colors.secondary} />
+          <Ionicons name="chevron-forward" size={wp('5%')} color={Colors.secondary} />
         </TouchableOpacity>
       </View>
 
@@ -143,7 +143,7 @@ const LineCustomChart = ({ period }: { period: string }) => {
           legend: ['Systolic', 'Diastolic'],
         }}
         width={screenWidth}
-        height={240}
+        height={hp('30%')}
         chartConfig={chartConfig}
         bezier
         withShadow={false}
@@ -159,31 +159,33 @@ const LineCustomChart = ({ period }: { period: string }) => {
 const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
-    marginVertical: 16,
-    padding: 8,
-    borderRadius: 16,
+    marginVertical: hp('2%'),
+    padding: wp('2.5%'),
+    borderRadius: wp('4%'),
     borderColor: Colors.secondary,
     borderWidth: 1,
     backgroundColor: '#FAFAFA',
-    height: 320,
-    width: 350,
-    marginLeft: 22,
+    height: hp('40%'),
+    width: wp('92%'),
+    alignSelf: 'center',
   },
   headerRow: {
     width: screenWidth,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 8,
-    paddingHorizontal: 10,
+    marginBottom: hp('1%'),
+    paddingHorizontal: wp('2.5%'),
   },
   weekText: {
-    fontSize: 14,
+    fontSize: hp('1.8%'),
     color: Colors.secondary,
     fontWeight: '600',
+    textAlign: 'center',
+    flex: 1,
   },
   chart: {
-    borderRadius: 16,
+    borderRadius: wp('4%'),
   },
 });
 
