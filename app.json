@@ -39,6 +39,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "64af173f-ec36-4035-99f7-1d0b644eba4b"
+      }
+    },
+    "owner": "viveena"
   }
 }
