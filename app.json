@@ -16,7 +16,8 @@
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.viveena.medii_track"
     },
     "web": {
       "bundler": "metro",
@@ -46,6 +47,12 @@
         "projectId": "64af173f-ec36-4035-99f7-1d0b644eba4b"
       }
     },
-    "owner": "viveena"
+    "owner": "viveena",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/64af173f-ec36-4035-99f7-1d0b644eba4b"
+    }
   }
 }

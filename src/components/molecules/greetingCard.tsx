@@ -1,6 +1,7 @@
 import { Colors } from '@/src/constants/colors';
 import { Fonts } from '@/src/constants/fonts';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
@@ -20,7 +21,7 @@ const GreetingCard = ({ name }: Props) => {
 
       {/* Right side: Notification and Language buttons */}
       <View style={styles.rightButtons}>
-        <TouchableOpacity style={styles.iconWrapper} onPress={() => console.log('Notification pressed')}>
+        <TouchableOpacity style={styles.iconWrapper} onPress={() => router.push('/afterHome/Screens/notification')}>
           <Ionicons name="notifications-outline" size={wp('5.8%')} color="#fff" />
         </TouchableOpacity>
 
