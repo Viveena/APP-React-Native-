@@ -22,107 +22,84 @@ import {
 } from 'react-native-responsive-screen';
 
 const AddDoctorScreen = () => {
-  const handleSave = () => {
-    router.push('/afterHome/profile_tab');
-  };
-
   const [isFavorite, setIsFavorite] = useState(false);
   const [remindInWeek, setRemindInWeek] = useState(false);
   const [isFamilyDoctor, setIsFamilyDoctor] = useState(false);
 
+  const handleSave = () => {
+    router.push('/afterHome/profile_tab');
+  };
+
   return (
     <ImageBackground
-          source={BackgroundImage.profileOptions_bg}
-          style={styles.background}
-          resizeMode="cover"
-        >
-    <ScrollView
-      contentContainerStyle={styles.container}
-      showsVerticalScrollIndicator={false}
+      source={BackgroundImage.profileOptions_bg}
+      style={styles.background}
+      resizeMode="cover"
     >
+      <ScrollView
+        contentContainerStyle={styles.container}
+        showsVerticalScrollIndicator={false}
+      >
+        <BackButton />
 
-      {/* Back Button */}
-      <BackButton />
+        <Text style={styles.title}>Add New{'\n'}Doctor</Text>
 
-      {/* Title */}
-      <Text style={styles.title}>
-        Add New{'\n'}Doctor
-      </Text>
+        <IconInput placeholder="Enter Your Name" icon="person-outline" />
+        <IconInput placeholder="Post" icon="person-outline" />
+        <IconInput placeholder="Enter Mobile Number" icon="call-outline" />
+        <IconInput placeholder="Enter Address" icon="location-outline" />
+        <IconInput placeholder="Number of visit" icon="person-outline" />
 
-      {/* Input Fields */}
-      <IconInput placeholder="Enter Your Name" icon="person-outline" />
-      <IconInput placeholder="Post" icon="person-outline" />
-      <IconInput placeholder="Enter Mobile Number" icon="call-outline" />
-      <IconInput placeholder="Enter Address" icon="location-outline" />
-      <IconInput placeholder="Number of visit" icon="person-outline" />
+        {/* Checkboxes */}
+        <View style={styles.checkboxGroup}>
+          {[
+            { label: 'Favorite Doctor', checked: isFavorite, setChecked: setIsFavorite },
+            { label: 'Reminder within 1 week', checked: remindInWeek, setChecked: setRemindInWeek },
+            { label: 'Family Doctor', checked: isFamilyDoctor, setChecked: setIsFamilyDoctor },
+          ].map(({ label, checked, setChecked }) => (
+            <TouchableOpacity
+              key={label}
+              style={styles.checkboxContainer}
+              onPress={() => setChecked(!checked)}
+              activeOpacity={0.7}
+            >
+              <View style={[styles.checkbox, checked && styles.checkedBox]}>
+                {checked && <Ionicons name="checkmark" size={wp('3.5%')} color="#fff" />}
+              </View>
+              <Text style={styles.checkboxLabel}>{label}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
 
-      {/* Checkboxes */}
-      <View style={styles.checkboxGroup}>
-  <TouchableOpacity
-    style={styles.checkboxContainer}
-    onPress={() => setIsFavorite(!isFavorite)}
-  >
-    <View style={[styles.checkbox, isFavorite && styles.checkedBox]}>
-      {isFavorite && (
-        <Ionicons name="checkmark" size={14} color="#fff" />
-      )}
-    </View>
-    <Text style={styles.checkboxLabel}>Favorite Doctor</Text>
-  </TouchableOpacity>
-
-  <TouchableOpacity
-    style={styles.checkboxContainer}
-    onPress={() => setRemindInWeek(!remindInWeek)}
-  >
-    <View style={[styles.checkbox, remindInWeek && styles.checkedBox]}>
-      {remindInWeek && (
-        <Ionicons name="checkmark" size={14} color="#fff" />
-      )}
-    </View>
-    <Text style={styles.checkboxLabel}>Reminder within 1 week</Text>
-  </TouchableOpacity>
-
-  <TouchableOpacity
-    style={styles.checkboxContainer}
-    onPress={() => setIsFamilyDoctor(!isFamilyDoctor)}
-  >
-    <View style={[styles.checkbox, isFamilyDoctor && styles.checkedBox]}>
-      {isFamilyDoctor && (
-        <Ionicons name="checkmark" size={14} color="#fff" />
-      )}
-    </View>
-    <Text style={styles.checkboxLabel}>Family Doctor</Text>
-  </TouchableOpacity>
-</View>
-
-
-      {/* Save Button */}
-      <TouchableOpacity style={styles.saveButton}>
-        <PrimaryButton title="SAVE" type="primary" onPress={handleSave} />
-      </TouchableOpacity>
-    </ScrollView>
+        <View style={styles.saveButton}>
+          <PrimaryButton title="SAVE" type="primary" onPress={handleSave} />
+        </View>
+      </ScrollView>
     </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  background: { flex: 1 },
+  background: {
+    flex: 1,
+  },
   container: {
+    flexGrow: 1,
     padding: wp('6%'),
     paddingTop: hp('6%'),
-    flexGrow: 1,
   },
   title: {
-    fontSize: 40,
+    fontSize: wp('9.5%'),
     fontFamily: Fonts.regular,
     color: Colors.secondary,
     marginBottom: hp('4%'),
     textAlign: 'center',
+    lineHeight: hp('5%'),
   },
   checkboxGroup: {
     marginTop: hp('3%'),
     marginBottom: hp('4%'),
-    marginLeft:hp('1%')
+    paddingHorizontal: wp('1%'),
   },
   checkboxContainer: {
     flexDirection: 'row',
@@ -130,26 +107,25 @@ const styles = StyleSheet.create({
     marginBottom: hp('1.5%'),
   },
   checkbox: {
-  width: 20,
-  height: 20,
-  borderRadius: 4,
-  borderWidth: 1,
-  borderColor: Colors.primary,
-  marginRight: wp('2.5%'),
-  justifyContent: 'center',
-  alignItems: 'center', // 🟢 important for icon centering
-},
-
+    width: wp('4.5%'),
+    height: wp('4.5%'),
+    borderRadius: wp('1%'),
+    borderWidth: 1,
+    borderColor: Colors.primary,
+    marginRight: wp('2.5%'),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   checkedBox: {
     backgroundColor: Colors.primary,
   },
   checkboxLabel: {
-    fontSize: 14,
+    fontSize: wp('3.8%'),
     fontFamily: Fonts.regular,
     color: '#333',
   },
   saveButton: {
-    marginBottom: hp('5%'),
+    marginBottom: hp('7%'),
   },
 });
 

@@ -170,6 +170,6 @@ const styles = StyleSheet.create({
     fontFamily:Fonts.regular
   },
   buttonWrapper: {
-    marginBottom: hp('5%'),
+    marginBottom: hp('7%'),
   },
 });

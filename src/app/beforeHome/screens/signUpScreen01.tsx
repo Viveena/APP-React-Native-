@@ -17,7 +17,7 @@ const SignUpScreen = () => {
     <ImageBackground
       source={BackgroundImage.bg_image_white} // Use correct extension
       style={styles.background}
-      resizeMode="cover"
+      resizeMode='stretch'
     >
       <View style={styles.container}>
         {/* Logo */}
@@ -78,8 +78,6 @@ const SignUpScreen = () => {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    width: wp('100%'),
-    height: hp('100%'),
   },
   container: {
     flex: 1,
@@ -101,7 +99,7 @@ const styles = StyleSheet.create({
   subHeading: {
     fontSize: wp('4.5%'),
     color: Colors.secondary,
-    marginBottom: hp('4%'),
+    marginBottom: hp('3%'),
     fontFamily: Fonts.regular,
   },
   socialContainer: {
@@ -111,7 +109,7 @@ const styles = StyleSheet.create({
   authButtons: {
     alignItems: 'center',
     width: '100%',
-    marginBottom: hp('5%'),
+    marginBottom: hp('4%'),
   },
   terms: {
     marginTop: hp('1%'),

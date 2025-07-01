@@ -1,4 +1,3 @@
-// SelectableCardList.tsx
 import { Colors } from '@/src/constants/colors';
 import { Fonts } from '@/src/constants/fonts';
 import { Ionicons } from '@expo/vector-icons';
@@ -10,7 +9,10 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
-import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 type CardItem = {
   title: string;
@@ -24,13 +26,18 @@ type Props = {
   onDelete?: (title: string) => void;
 };
 
-const SelectableCardList = ({ data, selectedItem, onSelect, onDelete }: Props) => {
+const SelectableCardList = ({
+  data,
+  selectedItem,
+  onSelect,
+  onDelete,
+}: Props) => {
   const renderRightActions = (itemTitle: string) => (
     <TouchableOpacity
       style={styles.deleteButton}
       onPress={() => onDelete?.(itemTitle)}
     >
-      <Ionicons name="trash-outline" size={25} color='red' />
+      <Ionicons name="trash-outline" size={wp('6%')} color="red" />
     </TouchableOpacity>
   );
 
@@ -39,9 +46,7 @@ const SelectableCardList = ({ data, selectedItem, onSelect, onDelete }: Props) =
       data={data}
       keyExtractor={(item) => item.title}
       renderItem={({ item }) => (
-        <Swipeable
-          renderRightActions={() => renderRightActions(item.title)}
-        >
+        <Swipeable renderRightActions={() => renderRightActions(item.title)}>
           <TouchableOpacity
             style={[
               styles.card,
@@ -56,34 +61,38 @@ const SelectableCardList = ({ data, selectedItem, onSelect, onDelete }: Props) =
           </TouchableOpacity>
         </Swipeable>
       )}
-      contentContainerStyle={{ paddingBottom: hp('12%') }}
+      contentContainerStyle={styles.listContainer}
       showsVerticalScrollIndicator={false}
     />
   );
 };
 
 const styles = StyleSheet.create({
+  listContainer: {
+    paddingBottom: hp('10%'),
+  },
   card: {
     backgroundColor: '#07AE9C29',
-    borderRadius: wp('5%'),
+    borderRadius: wp('4%'),
     paddingVertical: hp('2%'),
     paddingHorizontal: wp('5%'),
     marginBottom: hp('2%'),
-    height: 91,
-    width: 335,
+    height: hp('11%'),
+    width: '100%',
     justifyContent: 'center',
+    alignSelf: 'center',
   },
   selectedCard: {
     borderWidth: 2,
     borderColor: Colors.primary,
   },
   cardTitle: {
-    fontSize: 16,
+    fontSize: wp('4.5%'),
     fontFamily: Fonts.bold,
     color: Colors.primary,
   },
   cardDesc: {
-    fontSize: 12,
+    fontSize: wp('3.2%'),
     color: Colors.secondary,
     fontFamily: Fonts.regular,
     marginTop: hp('0.5%'),
@@ -91,14 +100,11 @@ const styles = StyleSheet.create({
   deleteButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 80,
-    marginBottom: hp('2%'),
-    borderRadius: wp('5%'),
-  },
-  deleteText: {
-    color:Colors.primary,
-    fontSize: 14,
-    fontFamily: Fonts.bold,
+    width: wp('17%'),
+    height: hp('11%'),
+    backgroundColor: '#FFF',
+    borderRadius: wp('4%'),
+    marginLeft: wp('2%'),
   },
 });
 

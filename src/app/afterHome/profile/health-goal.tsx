@@ -1,13 +1,15 @@
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
-    ImageBackground,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View
 } from 'react-native';
-import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 import BackButton from '@/src/components/atmos/backButton';
 import PrimaryButton from '@/src/components/atmos/primaryButton';
@@ -20,7 +22,7 @@ import { Fonts } from '@/src/constants/fonts';
 const healthGoals = [
   { title: 'Prioritize Sleep' },
   { title: 'Maintain a nourishing diet' },
-  { title: 'Stay Hydrated'},
+  { title: 'Stay Hydrated' },
   { title: 'Exercise Regularly' },
 ];
 
@@ -45,17 +47,19 @@ const HealthGoalScreen = () => {
       <View style={styles.container}>
         <BackButton />
 
-        <Text style={styles.heading}>What is your{'\n'}health goal?</Text>
+        <Text style={styles.heading}>
+          What is your{'\n'}health goal?
+        </Text>
 
-         <SelectableCardList
-            data={healthGoals}
-            selectedItem={selectedGoal}
-            onSelect={handleSelect}
-            />
+        <SelectableCardList
+          data={healthGoals}
+          selectedItem={selectedGoal}
+          onSelect={handleSelect}
+        />
 
-        <TouchableOpacity style={styles.saveButton}>
-        <PrimaryButton title="SAVE" type="primary" onPress={handleSave}/>
-      </TouchableOpacity>
+        <View style={styles.saveButton}>
+          <PrimaryButton title="SAVE" type="primary" onPress={handleSave} />
+        </View>
       </View>
     </ImageBackground>
   );
@@ -68,35 +72,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: hp('6%'),
-    paddingHorizontal: wp('7%'),
+    paddingHorizontal: wp('6%'),
   },
   heading: {
-    fontSize: 36,
+    fontSize: wp('8.5%'),
     fontFamily: Fonts.regular,
     color: Colors.secondary,
     textAlign: 'center',
     marginBottom: hp('4%'),
-  },
-  card: {
-    backgroundColor: '#07AE9C29',
-    borderRadius: wp('5%'),
-    paddingVertical: hp('2%'),
-    paddingHorizontal: wp('5%'),
-    marginBottom: hp('2%'),
-    height:91,
-    width:335
-  },
-  selectedCard: {
-    borderWidth: 2,
-    borderColor: Colors.primary,
-  },
-  cardTitle: {
-    fontSize: wp('4.5%'),
-    fontFamily: Fonts.bold,
-    color: Colors.primary,
+    lineHeight: hp('5%'),
   },
   saveButton: {
-    marginBottom: hp('5%'),
+    marginTop: hp('4%'),
+    marginBottom: hp('7%'),
   },
 });
 

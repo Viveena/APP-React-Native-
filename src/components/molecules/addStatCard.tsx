@@ -1,8 +1,10 @@
-// src/components/molecules/AddStatCard.tsx
 import { Colors } from '@/src/constants/colors';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 const AddStatCard = () => {
   return (
@@ -14,18 +16,19 @@ const AddStatCard = () => {
 
 const styles = StyleSheet.create({
   card: {
-    width: 162,
-    height: 227,
-    borderRadius: wp('6%'),
+    width: wp('42%'),          // approx 162dp on 390dp width screens
+    height: hp('28%'),         // approx 227dp on 800dp height screens
+    borderRadius: wp('5.5%'),
     borderWidth: 2,
     borderStyle: 'dashed',
     borderColor: Colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: wp('5%'),
+    marginLeft:wp('2.2%'),
+    backgroundColor: '#F0FAF9',
   },
   plus: {
-    fontSize: wp('10%'),
+    fontSize: wp('12%'),
     color: Colors.primary,
     fontWeight: 'bold',
   },

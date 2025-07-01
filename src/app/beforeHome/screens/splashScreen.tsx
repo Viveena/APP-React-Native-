@@ -24,12 +24,12 @@ const SplashScreen = () => {
     <ImageBackground
       source={BackgroundImage.bg_image_white}
       style={styles.background}
-      resizeMode="cover"
+      resizeMode='stretch'
     >
       <Image
         source={require('@/src/assets/images/01_splash_content.png')}
         style={styles.logo}
-        resizeMode="contain"
+        resizeMode='contain'
       />
     </ImageBackground>
   );
@@ -40,8 +40,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: wp('100%'),
-    height: hp('100%'),
   },
   logo: {
     width: wp('90%'),

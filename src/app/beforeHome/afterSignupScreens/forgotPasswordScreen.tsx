@@ -1,11 +1,12 @@
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
-    ImageBackground,
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
+  Alert,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
 } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
@@ -18,6 +19,24 @@ import { Fonts } from '@/src/constants/fonts';
 const ForgotPasswordScreen = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
+
+  const handleSendOTP = () => {
+    const trimmedEmail = email.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!trimmedEmail) {
+      Alert.alert('Please enter your email address');
+      return;
+    }
+
+    if (!emailRegex.test(trimmedEmail)) {
+      Alert.alert('Please enter a valid email address');
+      return;
+    }
+
+    // TODO: API call for sending OTP
+    router.push('/beforeHome/afterSignupScreens/otpVerify');
+  };
 
   return (
     <ImageBackground source={BackgroundImage.bg_image_white} style={styles.background}>
@@ -33,15 +52,23 @@ const ForgotPasswordScreen = () => {
 
         <Text style={styles.label}>Registered email address</Text>
         <View style={styles.emailBox}>
-            <TextInput
-                placeholder="andrew.ainsley@yourdomain.com"
-                placeholderTextColor="#888"
-                value={email}
-                onChangeText={setEmail}
-                        />
+          <TextInput
+            placeholder="andrew.ainsley@yourdomain.com"
+            placeholderTextColor="#888"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            style={styles.emailText}
+          />
         </View>
 
-        <PrimaryButton title="Send OTP Code" type="primary" onPress={() => router.push('/beforeHome/afterSignupScreens/otpVerify')} />
+        <PrimaryButton
+          title="Send OTP Code"
+          type="primary"
+          onPress={handleSendOTP}
+        />
       </View>
     </ImageBackground>
   );
@@ -56,7 +83,7 @@ const styles = StyleSheet.create({
     marginTop: hp('6%'),
   },
   container: {
-    marginTop: hp('4%'),
+    marginTop: hp('2%'),
   },
   title: {
     fontSize: wp('6.5%'),
@@ -79,14 +106,15 @@ const styles = StyleSheet.create({
   emailBox: {
     backgroundColor: Colors.text,
     padding: wp('4%'),
-    borderRadius: wp('2%'),
+    borderRadius: wp('5%'),
     borderWidth: 1,
     borderColor: Colors.primary,
-    marginBottom: hp('40%'),
+    marginBottom: hp('35%'),
   },
   emailText: {
     fontFamily: Fonts.regular,
     color: Colors.secondary,
+    fontSize: wp('4%'),
   },
 });
 

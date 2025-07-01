@@ -43,7 +43,7 @@ const ProfileStatCards = () => {
         <View key={index} style={[styles.card, { backgroundColor: item.backgroundColor }]}>
           {/* Edit Icon */}
           <TouchableOpacity style={styles.editIcon} onPress={() => console.log(`Edit ${item.label}`)}>
-            <Ionicons name="create-outline" size={14} color={Colors.primary} />
+            <Ionicons name="create-outline" size={wp('3.5%')} color={Colors.primary} />
           </TouchableOpacity>
 
           {/* Icon + Text */}
@@ -65,14 +65,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     rowGap: hp('2%'),
     marginBottom: hp('3%'),
+    marginHorizontal:-wp('1%')
   },
   card: {
-    width: 162,
-    height: 82,
-    borderRadius: 18,
+    width: wp('43%'),
+    height: hp('10.5%'),
+    borderRadius: wp('4%'),
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: wp('4%'),
+    paddingHorizontal: wp('5%'),
     gap: wp('3%'),
     position: 'relative',
   },
@@ -85,21 +86,21 @@ const styles = StyleSheet.create({
   },
   value: {
     fontFamily: Fonts.bold,
-    fontSize: 25,
+    fontSize: wp('6%'),
     color: Colors.secondary,
   },
   label: {
     fontFamily: Fonts.regular,
-    fontSize: 10,
+    fontSize: wp('3%'),
     color: Colors.secondary,
   },
   editIcon: {
     position: 'absolute',
-    top: 6,
-    right: 6,
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 4,
+    top: hp('1%'),
+    right: wp('2%'),
+    backgroundColor: Colors.text,
+    borderRadius: wp('3%'),
+    padding: wp('1%'),
     elevation: 2,
   },
 });

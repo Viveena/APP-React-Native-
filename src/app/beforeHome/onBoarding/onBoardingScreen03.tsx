@@ -55,8 +55,6 @@ const OnBoardingScreen03 = () => {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    width: wp('100%'),
-    height: hp('100%'),
     paddingTop: hp('6%'),
     paddingHorizontal: wp('6%'),
   },
@@ -105,7 +103,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: hp('7%'),
+    marginTop: hp('8%'),
     marginBottom: hp('2%'), 
   },
   dotsContainer: {

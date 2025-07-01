@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     width: '100%',
-    marginBottom:hp('-2%')
+    //marginBottom:hp('-2%')
   },
 });
 

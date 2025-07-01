@@ -9,9 +9,12 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
-import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 import AddStatCard from '@/src/components/molecules/addStatCard';
 import StatCard from '@/src/components/molecules/statCard';
@@ -37,7 +40,7 @@ const AllStatsModalScreen = () => {
     <ImageBackground
       source={BackgroundImage.bg_image_white}
       style={styles.backgroundImage}
-      resizeMode="cover"
+      resizeMode="stretch"
     >
       <BlurView intensity={40} tint="light" style={StyleSheet.absoluteFill} />
 
@@ -52,20 +55,14 @@ const AllStatsModalScreen = () => {
             {/* Header */}
             <Text style={styles.headerText}>Health & Habits</Text>
 
-            {/* Stat Cards */}
+            {/* Cards List */}
             <FlatList
               data={combinedStats}
               keyExtractor={(_, index) => index.toString()}
               numColumns={2}
               showsVerticalScrollIndicator={false}
-              columnWrapperStyle={{
-                justifyContent: 'space-between',
-                marginBottom: hp('2%'),
-              }}
-              contentContainerStyle={{
-                paddingTop: hp('1%'),
-                paddingBottom: hp('5%'),
-              }}
+              columnWrapperStyle={styles.columnWrapper}
+              contentContainerStyle={styles.contentContainer}
               renderItem={({ item }) =>
                 item.isAddCard ? (
                   <TouchableOpacity onPress={() => router.push('/afterHome/Screens/addNewStat')}>
@@ -86,10 +83,7 @@ const AllStatsModalScreen = () => {
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
-    width: wp('100%'),
-    height: hp('100%'),
-    justifyContent: 'center',
-    alignItems: 'center',
+
   },
   modalWrapper: {
     flex: 1,
@@ -100,19 +94,12 @@ const styles = StyleSheet.create({
   modalContent: {
     width: wp('100%'),
     height: hp('90%'),
-    backgroundColor: 'transparent', // corrected typo from 'transperent'
     borderRadius: wp('5%'),
-    padding: wp('3%'),
-    marginLeft:wp('0.9%')
-    // shadowColor: '#000',
-    // shadowOffset: { width: 0, height: 4 },
-    // shadowOpacity: 0.2,
-    // shadowRadius: 8,
-    // elevation: 8,
+    padding: wp('4%'),
   },
   closeButton: {
     position: 'absolute',
-    top: hp('2%'),
+    top: hp('3%'),
     right: wp('4%'),
     zIndex: 10,
   },
@@ -123,6 +110,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: hp('2%'),
     marginTop: hp('1%'),
+  },
+  columnWrapper: {
+    justifyContent: 'space-between',
+    marginBottom: hp('2%'),
+  },
+  contentContainer: {
+    paddingTop: hp('1%'),
+    paddingBottom: hp('6%'),
   },
 });
 

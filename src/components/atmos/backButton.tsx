@@ -24,7 +24,6 @@ const BackButton = ({
 const styles = StyleSheet.create({
   container: {
     padding: wp('2%'),
-    marginLeft:wp('2%'),
   },
 });
 

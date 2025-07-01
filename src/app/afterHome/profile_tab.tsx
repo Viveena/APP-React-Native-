@@ -129,14 +129,18 @@ const styles = StyleSheet.create({
     rowGap: hp('1.5%'),
   },
   statCard: {
-    width: 162,
-    height:82,
-    borderRadius: wp('4%'),
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: wp('4%'),
-    gap: wp('3%'),
-  },
+  width: wp('42%'),
+  height: hp('10%'),
+  borderRadius: wp('4%'),
+  flexDirection: 'row',
+  alignItems: 'center',
+  padding: wp('4%'),
+  gap: wp('3%'),
+  backgroundColor: '#fff', // optional
+  elevation: 2, // optional shadow for Android
+  //shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4, // for iOS
+},
+
   statIcon: {
     width: 44,
     height:44,

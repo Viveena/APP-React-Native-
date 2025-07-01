@@ -5,7 +5,7 @@ import {
   ImageBackground,
   StyleSheet,
   Text,
-  View
+  View,
 } from 'react-native';
 import {
   AgendaList,
@@ -29,23 +29,18 @@ import { router } from 'expo-router';
 const MedicationScreen = () => {
   const [selectedDate, setSelectedDate] = useState(dayjs().format('YYYY-MM-DD'));
 
-  // ✅ Grouping meds by date (fix)
   const agendaItems = medicationData.reduce((acc, item) => {
-    const existingSection = acc.find((section) => section.title === item.date);
-
-    const mappedMeds = item.meds.map((med) => ({
+    const existing = acc.find(section => section.title === item.date);
+    const mappedMeds = item.meds.map(med => ({
       name: med.name,
       dose: med.dose,
       time: item.time,
     }));
 
-    if (existingSection) {
-      existingSection.data.push(...mappedMeds);
+    if (existing) {
+      existing.data.push(...mappedMeds);
     } else {
-      acc.push({
-        title: item.date,
-        data: mappedMeds,
-      });
+      acc.push({ title: item.date, data: mappedMeds });
     }
 
     return acc;
@@ -83,38 +78,38 @@ const MedicationScreen = () => {
             <ExpandableCalendar
               firstDay={1}
               markedDates={markedDates}
-              onDayPress={(day) => setSelectedDate(day.dateString)}
+              onDayPress={day => setSelectedDate(day.dateString)}
+              disablePan={false}
               theme={{
                 calendarBackground: Colors.primary,
-                textSectionTitleColor: '#FFFFFF',
-                selectedDayBackgroundColor: '#FFFFFF',
+                textSectionTitleColor: '#fff',
+                selectedDayBackgroundColor: '#fff',
                 selectedDayTextColor: Colors.primary,
                 todayTextColor: '#FFEB3B',
-                dayTextColor: '#FFFFFF',
+                dayTextColor: '#fff',
                 textDisabledColor: '#FFFFFF50',
-                arrowColor: '#FFFFFF',
-                monthTextColor: '#FFFFFF',
+                arrowColor: '#fff',
+                monthTextColor: '#fff',
                 textDayFontFamily: Fonts.regular,
                 textMonthFontFamily: Fonts.bold,
                 textDayHeaderFontFamily: Fonts.regular,
-                textDayFontSize: 16,
-                textMonthFontSize: 14,
-                textDayHeaderFontSize: 13,
+                textDayFontSize: wp('4.2%'),
+                textMonthFontSize: wp('3.8%'),
+                textDayHeaderFontSize: wp('3.5%'),
               }}
-              disablePan={false}
               style={styles.calendar}
             />
           </View>
 
-          {/* Time & Medication bar */}
+          {/* Bar */}
           <View style={styles.barWrapper}>
             <Text style={styles.greyBarText}>Time</Text>
             <Text style={styles.greyBarText}>Medication</Text>
           </View>
 
-          {/* Agenda List */}
+          {/* Agenda */}
           <AgendaList
-            sections={agendaItems.filter((section) => section.title === selectedDate)}
+            sections={agendaItems.filter(section => section.title === selectedDate)}
             keyExtractor={(_, index) => index.toString()}
             renderItem={({ item }) => (
               <View style={styles.row}>
@@ -128,7 +123,7 @@ const MedicationScreen = () => {
             ListEmptyComponent={() => (
               <View style={styles.emptyContainer}>
                 <View style={styles.iconWrapper}>
-                  <Ionicons name="alert-circle" size={64} color="#fff" />
+                  <Ionicons name="alert-circle" size={wp('13%')} color="#fff" />
                 </View>
                 <Text style={styles.notFoundText}>
                   You have no medications or reminders at this date
@@ -145,9 +140,16 @@ const MedicationScreen = () => {
 
         {/* Buttons */}
         <View style={styles.Buttons}>
-          <PrimaryButton title="Add Medication" type="primary" 
-          onPress={() => router.push('/afterHome/Screens/addMedication')}/>
-          <PrimaryButton title="View Added Medication" type="secondary" onPress={() => router.push('/afterHome/Screens/viewAddedMedication')} />
+          <PrimaryButton
+            title="Add Medication"
+            type="primary"
+            onPress={() => router.push('/afterHome/Screens/addMedication')}
+          />
+          <PrimaryButton
+            title="View Added Medication"
+            type="secondary"
+            onPress={() => router.push('/afterHome/Screens/viewAddedMedication')}
+          />
         </View>
       </View>
     </ImageBackground>
@@ -167,7 +169,7 @@ const styles = StyleSheet.create({
     marginBottom: hp('1%'),
   },
   heading: {
-    fontSize: 20,
+    fontSize: wp('5.5%'),
     fontFamily: Fonts.bold,
     color: Colors.secondary,
     marginLeft: wp('5%'),
@@ -176,7 +178,7 @@ const styles = StyleSheet.create({
     borderRadius: wp('3%'),
     overflow: 'hidden',
     marginBottom: hp('1.5%'),
-    width: hp('41%'),
+    width: '100%',
   },
   calendar: {
     paddingLeft: wp('1%'),
@@ -184,7 +186,7 @@ const styles = StyleSheet.create({
   barWrapper: {
     backgroundColor: '#F5F5F5',
     height: hp('5%'),
-    borderRadius: 22,
+    borderRadius: wp('6%'),
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: wp('10%'),
@@ -192,7 +194,7 @@ const styles = StyleSheet.create({
     marginBottom: hp('1.5%'),
   },
   greyBarText: {
-    fontSize: 16,
+    fontSize: wp('4%'),
     fontFamily: Fonts.bold,
     color: Colors.secondary,
   },
@@ -205,7 +207,7 @@ const styles = StyleSheet.create({
   timeText: {
     width: wp('20%'),
     fontFamily: Fonts.regular,
-    fontSize: 14,
+    fontSize: wp('3.5%'),
     color: '#00000080',
     marginTop: hp('1.5%'),
     marginLeft: hp('0.5%'),
@@ -217,27 +219,27 @@ const styles = StyleSheet.create({
   emptyContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: hp('5%'),
+    paddingVertical: hp('6%'),
     paddingHorizontal: wp('5%'),
   },
   iconWrapper: {
     backgroundColor: Colors.primary,
     borderRadius: 50,
-    width: 80,
-    height: 80,
+    width: wp('18%'),
+    height: wp('18%'),
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: hp('2%'),
   },
   notFoundText: {
-    fontSize: 18,
+    fontSize: wp('4.5%'),
     color: Colors.primary,
     fontFamily: Fonts.bold,
     textAlign: 'center',
     marginBottom: hp('1%'),
   },
   subtextnotfound: {
-    fontSize: 14,
+    fontSize: wp('3.5%'),
     color: Colors.secondary,
     textAlign: 'center',
     fontFamily: Fonts.regular,
@@ -245,7 +247,7 @@ const styles = StyleSheet.create({
   Buttons: {
     alignItems: 'center',
     width: '100%',
-    marginBottom: hp('5%'),
+    marginBottom: hp('7%'),
   },
 });
 

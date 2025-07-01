@@ -152,13 +152,11 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    width: '100%',
-    height: '100%',
   },
   container: {
     paddingHorizontal: wp('4%'),
     paddingTop: hp('1.5%'),
-    paddingBottom: hp('13%'),
+    paddingBottom: hp('20%'),
   },
   section: {
     marginBottom: hp('0%'),

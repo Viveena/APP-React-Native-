@@ -50,7 +50,7 @@ const ReportScreen = () => {
     <ImageBackground
           source={BackgroundImage.profileOptions_bg}
           style={styles.background}
-          resizeMode="cover"
+          resizeMode="stretch"
         >
     <ScrollView>
     <View style={styles.container}>

@@ -159,6 +159,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.primary,
   },
   buttonWrapper: {
-    marginBottom: hp('5%'),
+    marginBottom: hp('7%'),
   },
 });

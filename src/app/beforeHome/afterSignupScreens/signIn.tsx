@@ -2,6 +2,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
+  Alert,
   Image,
   ImageBackground,
   StyleSheet,
@@ -25,15 +26,32 @@ const SignIn = () => {
   const [agree, setAgree] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-
   const router = useRouter();
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const onSignin = () => {
-      router.push('/beforeHome/afterSignupScreens/setToGo');
-      if(agree){
-         console.log('Email:', email);
-        console.log('Password:', password);
-      }
+    if (!email || !validateEmail(email)) {
+      Alert.alert('Please enter a valid email address');
+      return;
+    }
+
+    if (password.length < 8) {
+      Alert.alert('Password must be at least 8 characters long');
+      return;
+    }
+
+    if (!agree) {
+      Alert.alert('Please check "Remember me" to continue');
+      return;
+    }
+
+    console.log('Email:', email);
+    console.log('Password:', password);
+    router.push('/beforeHome/afterSignupScreens/setToGo');
   };
 
   return (
@@ -42,28 +60,23 @@ const SignIn = () => {
       style={styles.background}
       resizeMode="cover"
     >
-    
-        {/* Back Arrow */}
-         <View style={styles.backWrapper}>
-          <BackButton />
-        </View>
+      <View style={styles.backWrapper}>
+        <BackButton />
+      </View>
 
-        {/* Main Content */}
-        <View style={styles.container}>
+      <View style={styles.container}>
         <View>
-          {/* Logo */}
-            <Image
-                source={require('@/src/assets/images/greenLogo.png')}
-                style={styles.logo}
-                />
+          <Image
+            source={require('@/src/assets/images/greenLogo.png')}
+            style={styles.logo}
+          />
 
-          {/* Heading */}
           <Text style={styles.heading}>Welcome back! 👋</Text>
           <Text style={styles.subtext}>
             Login to continue your health journey
           </Text>
 
-          {/* Email Field */}
+          {/* Email */}
           <Text style={styles.fieldname}>Email</Text>
           <View style={styles.inputWrapper}>
             <FontAwesome name="envelope" size={wp('4%')} color="black" style={styles.icon} />
@@ -73,10 +86,12 @@ const SignIn = () => {
               placeholderTextColor="#888"
               value={email}
               onChangeText={setEmail}
+              keyboardType="email-address"
+              autoCapitalize="none"
             />
           </View>
 
-          {/* Password Field */}
+          {/* Password */}
           <Text style={styles.fieldname}>Password</Text>
           <View style={styles.inputWrapper}>
             <FontAwesome name="lock" size={wp('4%')} color="black" style={styles.icon} />
@@ -97,42 +112,39 @@ const SignIn = () => {
             </TouchableOpacity>
           </View>
 
-
-          {/* Terms & Conditions */}
+          {/* Remember Me + Forgot Password */}
           <View style={styles.checkboxRow}>
             <TouchableOpacity
-                onPress={() => setAgree(!agree)}
-                style={[
+              onPress={() => setAgree(!agree)}
+              style={[
                 styles.customCheckbox,
                 {
-                    backgroundColor: agree ? Colors.primary : 'transparent',
-                    borderColor: Colors.primary,
+                  backgroundColor: agree ? Colors.primary : 'transparent',
+                  borderColor: Colors.primary,
                 },
-                ]}
+              ]}
             >
-                {agree && <Text style={styles.checkmark}>✓</Text>}
+              {agree && <Text style={styles.checkmark}>✓</Text>}
             </TouchableOpacity>
 
             <Text style={styles.remember}>
-                Remember me{'\t\t\t\t'}
-                <Text
+              Remember me{'\t\t\t\t'}
+              <Text
                 style={styles.link}
-                onPress={() => router.push('/beforeHome/afterSignupScreens/forgotPasswordScreen')} 
-                >
+                onPress={() => router.push('/beforeHome/afterSignupScreens/forgotPasswordScreen')}
+              >
                 Forgot Password?
-                </Text>
+              </Text>
             </Text>
-            </View>
+          </View>
 
-
-          {/* Already have an account */}
+          {/* Don't have account */}
           <View style={styles.loginRow}>
-            <Text style={styles.loginText}>Don't have an account?   </Text>
+            <Text style={styles.loginText}>Don't have an account? </Text>
             <TouchableOpacity onPress={() => router.push('/beforeHome/screens/signUpScreen02')}>
-                <Text style={styles.link}>Sign Up</Text>
+              <Text style={styles.link}>Sign Up</Text>
             </TouchableOpacity>
-            </View>
-
+          </View>
 
           {/* Divider */}
           <View style={styles.dividerContainer}>
@@ -140,7 +152,6 @@ const SignIn = () => {
             <Text style={styles.dividerText}>or continue with</Text>
             <View style={styles.dividerLine} />
           </View>
-
 
           {/* Social Buttons */}
           <View style={styles.socialRow}>
@@ -158,13 +169,9 @@ const SignIn = () => {
             />
           </View>
 
-          {/* Sign Up Button */}
+          {/* Sign In Button */}
           <View style={styles.buttonWrapper}>
-            <PrimaryButton
-              title="Sign in"
-              type="primary"
-              onPress={onSignin}
-            />
+            <PrimaryButton title="Sign in" type="primary" onPress={onSignin} />
           </View>
         </View>
       </View>
@@ -179,35 +186,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   backWrapper: {
-  position: 'absolute',
-  top: hp('7%'),
-  left: wp('6%'),
-},
+    position: 'absolute',
+    top: hp('7%'),
+    left: wp('6%'),
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     paddingTop: hp('7.5%'),
     paddingHorizontal: wp('6%'),
   },
-  header: {
-    position: 'absolute',
-    top: hp('6%'),
-    left: wp('5%'),
-    zIndex: 10,
-  },
-  logoContainer: {
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '100%',
-  marginBottom: hp('2.5%'),
- },
   logo: {
-  width: wp('25%'),
-  height: wp('25%'),
-  resizeMode: 'contain',
-  alignSelf: 'center', 
-  marginBottom: hp('2%'), 
-},
+    width: wp('25%'),
+    height: wp('25%'),
+    resizeMode: 'contain',
+    alignSelf: 'center',
+    marginBottom: hp('2%'),
+  },
   heading: {
     fontSize: wp('6.5%'),
     fontFamily: Fonts.bold,
@@ -223,7 +218,7 @@ const styles = StyleSheet.create({
   fieldname: {
     fontWeight: 'bold',
     color: Colors.primary,
-    marginTop: hp('1.5%'),
+    marginTop: hp('0.5%'),
     marginLeft: hp('1%'),
     marginBottom: hp('0.5%'),
   },
@@ -238,12 +233,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.primary,
     borderWidth: 1,
   },
-    loginRow: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: hp('1%'),
-    },
   icon: {
     marginRight: wp('2%'),
   },
@@ -277,43 +266,45 @@ const styles = StyleSheet.create({
     fontSize: wp('3.2%'),
     fontFamily: Fonts.regular,
   },
+  loginRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: hp('0.5%'),
+  },
   loginText: {
-    marginTop: hp('1%'),
     textAlign: 'center',
     color: Colors.secondary,
   },
   link: {
     color: Colors.primary,
-    fontFamily:Fonts.bold,
-    marginTop:hp('0.9%'),
+    fontFamily: Fonts.bold,
   },
   dividerContainer: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'center',
-  marginVertical: hp('3%'),
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: hp('2.5%'),
   },
-    dividerLine: {  
+  dividerLine: {
     flex: 1,
     height: 1,
     backgroundColor: '#9999',
     marginHorizontal: wp('2.5%'),
-    },
-
-    dividerText: {
+  },
+  dividerText: {
     color: Colors.secondary,
     fontSize: wp('3.5%'),
     fontFamily: Fonts.regular,
-    },
-
+  },
   socialRow: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginVertical: hp('2.2%'),
+    marginVertical: hp('2%'),
   },
   buttonWrapper: {
     marginBottom: hp('5%'),
-    width:wp('89%')
+    width: wp('89%'),
   },
 });
 

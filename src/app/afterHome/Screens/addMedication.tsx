@@ -174,123 +174,94 @@ const AddMedicationScreen = () => {
 const styles = StyleSheet.create({
   background: { flex: 1 },
   container: {
-    padding: wp('6%'),
+    paddingHorizontal: wp('6%'),
     paddingTop: hp('4%'),
-    paddingBottom:hp('13%')
+    paddingBottom: hp('5%'),
   },
   title: {
-    fontSize: 40,
+    fontSize: wp('8%'),
     fontFamily: Fonts.regular,
     color: Colors.secondary,
     textAlign: 'center',
     marginBottom: hp('1.5%'),
   },
   subtext: {
-    fontSize: 14,
+    fontSize: wp('3.5%'),
     color: Colors.secondary,
     textAlign: "center",
     marginBottom: hp('2.5%'),
   },
   subtexttitle: {
-    fontSize: 14,
+    fontSize: wp('3.5%'),
     color: Colors.secondary,
-    textAlign: "left",
-    marginBottom: hp('2.5%'),
+    marginBottom: hp('2%'),
   },
   sectionTitle: {
-    fontSize: 16,
-    fontFamily:Fonts.bold,
-    marginVertical: hp('1%'),
-    color:Colors.secondary,
+    fontSize: wp('4%'),
+    fontFamily: Fonts.bold,
+    marginVertical: hp('1.2%'),
+    color: Colors.secondary,
   },
   searchContainer: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  backgroundColor: '#D2F0ED',
-  borderRadius: 22,
-  paddingHorizontal: 12,
-  marginBottom: 16,
-  height:52,
-  width:343
-},
-
-searchIcon: {
-  marginRight: 8,
-},
-
-searchInput: {
-  flex: 1,
-  fontSize: 14,
-  fontFamily: Fonts.regular,
-  color: '#333',
-  paddingVertical: 10,
-},
-
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#D2F0ED',
+    borderRadius: 22,
+    paddingHorizontal: wp('4%'),
+    marginBottom: hp('2%'),
+    height: hp('6.5%'),
+  },
+  searchIcon: {
+    marginRight: wp('2%'),
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: wp('3.5%'),
+    fontFamily: Fonts.regular,
+    color: '#333',
+  },
   input: {
     borderWidth: 1,
     borderColor: '#0546468C',
-    borderRadius:22,
+    borderRadius: 22,
     paddingHorizontal: wp('4%'),
     paddingVertical: hp('1.2%'),
-    fontSize: 14,
+    fontSize: wp('3.5%'),
     marginBottom: hp('2%'),
     fontFamily: Fonts.regular,
     color: '#333',
-    height:52,
-    width:343
-
+    height: hp('6.5%'),
   },
   row: {
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  marginBottom:hp('0.2%'),
-  marginTop:hp('0.5%')
-},
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: wp('3%'),
+    marginBottom: hp('1%'),
+  },
+  smallInput: {
+    width: '48%',
+  },
   pillrow: {
     flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom:hp('0.2%'),
-    marginTop:hp('0.1%')
-  },
-
-halfInput: {
-  width: 161,
-},
-
-halfDropdown: {
-  width: 161,
-},
-
-  smallInput: {
-    width: 161,
-  },
-  addInstructionBtn: {
-    borderWidth: 1,
-    borderColor: Colors.primary,
-    paddingVertical: hp('1.2%'),
-    borderRadius: wp('6%'),
-    alignItems: 'center',
-    marginTop: hp('1.5%'),
-  },
-  addInstructionText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: Colors.primary,
+    flexWrap: 'wrap',
+    gap: wp('3%'),
+    marginTop: hp('1%'),
+    marginBottom: hp('2.5%'),
   },
   submitBtn: {
     backgroundColor: Colors.primary,
-    paddingVertical: hp('1.8%'),
+    paddingVertical: hp('2%'),
     borderRadius: wp('6%'),
     alignItems: 'center',
     marginTop: hp('3%'),
     marginBottom: hp('5%'),
   },
   submitText: {
-    color: '#fff',
-    fontSize: 16,
+    color: Colors.text,
+    fontSize: wp('4%'),
     fontWeight: '700',
   },
 });
+
 
 export default AddMedicationScreen;

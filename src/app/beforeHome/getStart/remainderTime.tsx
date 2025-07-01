@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
   },
   indicator: {
     position: 'absolute',
-    top: (PICKER_HEIGHT + hp('8.5%') - ITEM_HEIGHT) / 2,
+    top: (PICKER_HEIGHT + hp('9.5%') - ITEM_HEIGHT) / 2,
     height: ITEM_HEIGHT,
     width: '100%',
     borderTopWidth: 2,
@@ -206,6 +206,6 @@ const styles = StyleSheet.create({
     marginTop: hp('1%'),
   },
   buttonWrapper: {
-    marginBottom: hp('5%'),
+    marginBottom: hp('7%'),
   },
 });

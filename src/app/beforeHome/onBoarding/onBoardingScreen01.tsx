@@ -15,7 +15,7 @@ const OnBoardingScreen01 = () => {
     <ImageBackground
       source={BackgroundImage.bg_image_green}
       style={styles.background}
-      resizeMode="cover"
+      resizeMode="stretch"
     >
       {/* Skip */}
       <SkipButton onPress={() => router.push('/beforeHome/screens/signUpScreen01')} />
@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     width: wp('100%'),
-    height: hp('100%'),
     paddingTop: hp('6%'),
     paddingHorizontal: wp('6%'),
   },
@@ -106,8 +105,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: hp('7%'),
-    marginBottom: hp('2%'), // Bottom spacing: responsive
+    marginTop: hp('8%'),
+    marginBottom:hp('2%')
   },
   dotsContainer: {
     flexDirection: 'row',

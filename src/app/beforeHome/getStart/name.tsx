@@ -121,6 +121,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   buttonWrapper: {
-    marginBottom: hp('5%'),
+    marginBottom: hp('7%'),
   },
 });
