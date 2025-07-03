@@ -1,80 +1,113 @@
 import BackButton from '@/src/components/atmos/backButton';
-import IconInput from '@/src/components/atmos/iconInput';
-import PrimaryButton from '@/src/components/atmos/primaryButton';
 import { BackgroundImage } from '@/src/constants/backgroundImage';
 import { Colors } from '@/src/constants/colors';
 import { Fonts } from '@/src/constants/fonts';
-import { Ionicons } from '@expo/vector-icons';
-
-import { router } from 'expo-router';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
+  Image,
   ImageBackground,
-  ScrollView,
+  Linking,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { SwipeListView } from 'react-native-swipe-list-view';
 
-const AddDoctorScreen = () => {
-  const [isFavorite, setIsFavorite] = useState(false);
-  const [remindInWeek, setRemindInWeek] = useState(false);
-  const [isFamilyDoctor, setIsFamilyDoctor] = useState(false);
+const dummyDoctors = [
+  {
+    id: '1',
+    name: 'Dr. Priya Mehta',
+    post: 'Cardiologist',
+    phone: '+911234567890',
+    image: require('@/src/assets/images/profile.png'),
+  },
+  {
+    id: '2',
+    name: 'Dr. Raj Malhotra',
+    post: 'Pediatrician',
+    phone: '+911112223334',
+    image: require('@/src/assets/images/profile.png'),
+  },
+];
 
-  const handleSave = () => {
-    router.push('/afterHome/profile_tab');
+const DoctorListScreen = () => {
+  const [doctors, setDoctors] = useState(dummyDoctors);
+  const router = useRouter();
+
+  const handleDelete = (id) => {
+    setDoctors((prev) => prev.filter((doc) => doc.id !== id));
   };
+
+  const renderItem = ({ item }) => (
+    <View style={styles.card}>
+      <Image source={item.image} style={styles.avatar} />
+
+      <View style={styles.infoContainer}>
+        <Text style={styles.name}>{item.name}</Text>
+        <Text style={styles.post}>{item.post}</Text>
+      </View>
+
+      <View style={styles.actions}>
+        <TouchableOpacity
+          style={styles.iconButton}
+          onPress={() => Linking.openURL(`tel:${item.phone}`)}
+        >
+          <Ionicons name="call" size={20} color={Colors.primary} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.iconButton}
+          onPress={() => Linking.openURL(`https://wa.me/${item.phone.replace('+', '')}`)}
+        >
+          <FontAwesome name="whatsapp" size={25} color={Colors.primary} />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+
+  const renderHiddenItem = ({ item }) => (
+    <View style={styles.hiddenContainer}>
+      <TouchableOpacity
+        style={styles.deleteButton}
+        onPress={() => handleDelete(item.id)}
+      >
+        <Ionicons name="trash" size={24} color={Colors.primary} />
+      </TouchableOpacity>
+    </View>
+  );
 
   return (
     <ImageBackground
       source={BackgroundImage.profileOptions_bg}
       style={styles.background}
-      resizeMode="cover"
+      resizeMode="stretch"
     >
-      <ScrollView
-        contentContainerStyle={styles.container}
-        showsVerticalScrollIndicator={false}
-      >
+      <View style={styles.screen}>
+        {/* Back Button */}
         <BackButton />
 
-        <Text style={styles.title}>Add New{'\n'}Doctor</Text>
-
-        <IconInput placeholder="Enter Your Name" icon="person-outline" />
-        <IconInput placeholder="Post" icon="person-outline" />
-        <IconInput placeholder="Enter Mobile Number" icon="call-outline" />
-        <IconInput placeholder="Enter Address" icon="location-outline" />
-        <IconInput placeholder="Number of visit" icon="person-outline" />
-
-        {/* Checkboxes */}
-        <View style={styles.checkboxGroup}>
-          {[
-            { label: 'Favorite Doctor', checked: isFavorite, setChecked: setIsFavorite },
-            { label: 'Reminder within 1 week', checked: remindInWeek, setChecked: setRemindInWeek },
-            { label: 'Family Doctor', checked: isFamilyDoctor, setChecked: setIsFamilyDoctor },
-          ].map(({ label, checked, setChecked }) => (
-            <TouchableOpacity
-              key={label}
-              style={styles.checkboxContainer}
-              onPress={() => setChecked(!checked)}
-              activeOpacity={0.7}
-            >
-              <View style={[styles.checkbox, checked && styles.checkedBox]}>
-                {checked && <Ionicons name="checkmark" size={wp('3.5%')} color="#fff" />}
-              </View>
-              <Text style={styles.checkboxLabel}>{label}</Text>
-            </TouchableOpacity>
-          ))}
+        {/* Header Row */}
+        <View style={styles.headerRow}>
+          <Text style={styles.heading}>Doctors</Text>
+          <TouchableOpacity onPress={() => router.push('/afterHome/profile/add_doctor')}>
+            <Ionicons name="add-circle" size={32} color={Colors.primary} />
+          </TouchableOpacity>
         </View>
 
-        <View style={styles.saveButton}>
-          <PrimaryButton title="SAVE" type="primary" onPress={handleSave} />
-        </View>
-      </ScrollView>
+        {/* Doctor List */}
+        <SwipeListView
+          data={doctors}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+          renderHiddenItem={renderHiddenItem}
+          rightOpenValue={-75}
+          disableRightSwipe
+          contentContainerStyle={{ paddingBottom: hp('10%') }}
+        />
+      </View>
     </ImageBackground>
   );
 };
@@ -83,50 +116,73 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
   },
-  container: {
-    flexGrow: 1,
-    padding: wp('6%'),
-    paddingTop: hp('6%'),
+  screen: {
+    flex: 1,
+    paddingHorizontal: wp('4%'),
+    paddingTop: hp('5.5%'),
   },
-  title: {
-    fontSize: wp('9.5%'),
+  headerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: hp('2%'),
+    paddingHorizontal: wp('1%'),
+    marginTop:hp('1%')
+  },
+  heading: {
+    fontSize: wp('8.5%'),
     fontFamily: Fonts.regular,
     color: Colors.secondary,
-    marginBottom: hp('4%'),
-    textAlign: 'center',
-    lineHeight: hp('5%'),
   },
-  checkboxGroup: {
-    marginTop: hp('3%'),
-    marginBottom: hp('4%'),
-    paddingHorizontal: wp('1%'),
-  },
-  checkboxContainer: {
+  card: {
+    backgroundColor: '#E0F5F2',
+    borderRadius: wp('4%'),
     flexDirection: 'row',
     alignItems: 'center',
+    padding: wp('4%'),
     marginBottom: hp('1.5%'),
   },
-  checkbox: {
-    width: wp('4.5%'),
-    height: wp('4.5%'),
-    borderRadius: wp('1%'),
-    borderWidth: 1,
-    borderColor: Colors.primary,
-    marginRight: wp('2.5%'),
+  avatar: {
+    width: wp('14%'),
+    height: wp('14%'),
+    borderRadius: wp('7%'),
+    marginRight: wp('4%'),
+  },
+  infoContainer: {
+    flex: 1,
+  },
+  name: {
+    fontSize: wp('4.5%'),
+    fontFamily: Fonts.bold,
+    color: Colors.primary,
+  },
+  post: {
+    fontSize: wp('3.8%'),
+    fontFamily: Fonts.regular,
+    color: Colors.secondary,
+  },
+  actions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: wp('2%'),
+  },
+  iconButton: {
+    padding: wp('1.5%'),
+  },
+  hiddenContainer: {
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    flex: 1,
+    paddingRight: wp('4%'),
+    borderRadius: wp('5%'),
+    marginBottom: hp('1.5%'),
+  },
+  deleteButton: {
+    width: 75,
+    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  checkedBox: {
-    backgroundColor: Colors.primary,
-  },
-  checkboxLabel: {
-    fontSize: wp('3.8%'),
-    fontFamily: Fonts.regular,
-    color: '#333',
-  },
-  saveButton: {
-    marginBottom: hp('7%'),
-  },
 });
 
-export default AddDoctorScreen;
+export default DoctorListScreen;

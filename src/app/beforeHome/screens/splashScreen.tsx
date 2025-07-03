@@ -1,20 +1,43 @@
 import { BackgroundImage } from '@/src/constants/backgroundImage';
 import { usePreloadAssets } from '@/src/hooks/background_load';
 import { useRouter } from 'expo-router';
-import React, { useEffect } from 'react';
-import { Image, ImageBackground, StyleSheet } from 'react-native';
-import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import React, { useEffect, useRef } from 'react';
+import {
+  Animated,
+  ImageBackground,
+  StyleSheet,
+} from 'react-native';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 const SplashScreen = () => {
   const router = useRouter();
   const ready = usePreloadAssets();
 
+  // Animation values
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const scaleAnim = useRef(new Animated.Value(0.8)).current;
+
   useEffect(() => {
     if (ready) {
-      const timeout = setTimeout(() => {
+      // Start parallel animations
+      Animated.parallel([
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 2000,
+          useNativeDriver: true,
+        }),
+        Animated.timing(scaleAnim, {
+          toValue: 1,
+          duration: 2000,
+          useNativeDriver: true,
+        }),
+      ]).start(() => {
+        // Navigate after animation completes
         router.push('/beforeHome/onBoarding/onBoardingScreen01');
-      }, 3000);
-      return () => clearTimeout(timeout);
+      });
     }
   }, [ready]);
 
@@ -22,14 +45,20 @@ const SplashScreen = () => {
 
   return (
     <ImageBackground
-      source={BackgroundImage.bg_image_white}
+      source={BackgroundImage.bg_image_green}
       style={styles.background}
-      resizeMode='stretch'
+      resizeMode="stretch"
     >
-      <Image
-        source={require('@/src/assets/images/01_splash_content.png')}
-        style={styles.logo}
-        resizeMode='contain'
+      <Animated.Image
+        source={BackgroundImage.splash_logo}
+        style={[
+          styles.logo,
+          {
+            opacity: fadeAnim,
+            transform: [{ scale: scaleAnim }],
+          },
+        ]}
+        resizeMode="contain"
       />
     </ImageBackground>
   );
